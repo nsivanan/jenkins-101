@@ -1,7 +1,7 @@
 pipeline {
     agent { 
         node {
-            label 'docker-agent-python'
+            label 'Built-In Node'
             }
       }
     triggers {
@@ -13,6 +13,7 @@ pipeline {
                 echo "Building.."
                 sh '''
                 cd myapp
+                apt install python3-pip -y
                 pip install -r requirements.txt
                 '''
             }

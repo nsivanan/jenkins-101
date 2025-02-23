@@ -1,40 +1,52 @@
 pipeline {
-    agent { 
-        node {
-            label 'cici-stratus-jenkins-slave'
-            }
-      }
-    triggers {
-        pollSCM '* * * * *'
+    agent cici-stratus-jenkins-slave
+
+    environment {
+        VENV_DIR = 'venv'  // Virtual Environment Directory
     }
+
     stages {
-        stage('Build') {
+        stage('Clone Repository') {
             steps {
-                echo "Building.."
+                git 'https://github.com/nsivanan/jenkins-101.git'
+            }
+        }
+
+        stage('Setup Python Environment') {
+            steps {
+                sh 'python3 -m venv $VENV_DIR'
+                sh 'source $VENV_DIR/bin/activate && python3 -m pip install --upgrade pip'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
                 sh '''
-                cd myapp
-                apt install python3-pip -y
+                source $VENV_DIR/bin/activate
                 pip install -r requirements.txt
                 '''
             }
         }
-        stage('Test') {
+
+        stage('Run Tests') {
             steps {
-                echo "Testing.."
-                sh '''
-                cd myapp
-                python3 hello.py
-                python3 hello.py --name=Brad
-                '''
+                sh 'source $VENV_DIR/bin/activate && pytest tests/'
             }
         }
-        stage('Deliver') {
+
+        stage('Deploy') {
             steps {
-                echo 'Deliver....'
-                sh '''
-                echo "doing delivery stuff.."
-                '''
+                sh 'source $VENV_DIR/bin/activate && python3 helloworld.py'
             }
+        }
+    }
+
+    post {
+        success {
+            echo '✅ Build and deployment completed successfully!'
+        }
+        failure {
+            echo '❌ Build failed. Check logs for errors.'
         }
     }
 }

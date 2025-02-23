@@ -1,5 +1,5 @@
 pipeline {
-    agent cici-stratus-jenkins-slave
+    agent "cici-stratus-jenkins-slave"
 
     environment {
         VENV_DIR = 'venv'  // Virtual Environment Directory

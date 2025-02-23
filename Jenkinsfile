@@ -15,7 +15,7 @@ pipeline {
         stage('Setup Python Environment') {
             steps {
                 sh 'sudo python3 -m venv $VENV_DIR'
-                sh 'source $VENV_DIR/bin/activate && sudo python3 -m pip install --upgrade pip'
+                sh 'source $VENV_DIR/bin/activate'
             }
         }
 

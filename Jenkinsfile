@@ -2,7 +2,7 @@ pipeline {
     agent {label 'cici-stratus-jenkins-slave'}
 
     environment {
-        VENV_DIR = 'venv'  // Virtual Environment Directory
+        VENV_DIR = 'venv_python'  // Virtual Environment Directory
     }
 
     stages {

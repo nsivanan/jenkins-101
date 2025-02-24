@@ -15,14 +15,14 @@ pipeline {
         stage('Setup Python Environment') {
             steps {
                 sh 'python3 -m venv $VENV_DIR'
-                sh 'source $VENV_DIR/bin/activate'
+                sh 'bash -c "source venv_python/bin/activate && python --version"'
             }
         }
 
         stage('Install Dependencies') {
             steps {
                 sh '''
-                source $VENV_DIR/bin/activate
+                bash -c "source venv_python/bin/activate"
                 pip install -r requirements.txt
                 '''
             }

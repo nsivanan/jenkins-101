@@ -14,7 +14,7 @@ pipeline {
 
         stage('Setup Python Environment') {
             steps {
-                sh 'sudo python3 -m venv $VENV_DIR'
+                sh 'python3 -m venv $VENV_DIR'
                 sh 'source $VENV_DIR/bin/activate'
             }
         }

@@ -23,7 +23,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh 'bash -c "source venv_python/bin/activate"'
-                sh '/home/jenkins/workspace/python_project_pipeline/venv_python/bin/python3 -m pip install -r requirements.txt'
+                sh '/home/jenkins/workspace/python_project_pipeline/venv_python/bin/python3 -m pip install -r myapp/requirements.txt'
             }
         }
 

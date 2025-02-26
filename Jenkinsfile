@@ -22,7 +22,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh 'bash -c "source venv_python/bin/activate"'
-                sh 'bash -c "pip install -r requirements.txt"'
+                sh 'python3 -m pip install -r requirements.txt'
             }
         }
 

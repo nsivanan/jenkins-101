@@ -16,7 +16,6 @@ pipeline {
             steps {
                 sh 'python3 -m venv $VENV_DIR'
                 sh 'bash -c "source venv_python/bin/activate && python --version"'
-                sh 'sudo apt install python3-pip'
                 sh 'pip list'
             }
         }

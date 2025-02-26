@@ -27,15 +27,9 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
-            steps {
-                sh 'source $VENV_DIR/bin/activate && echo "done"'
-            }
-        }
-
         stage('Deploy') {
             steps {
-                sh 'source $VENV_DIR/bin/activate && python3 helloworld.py'
+                sh 'bash -c "source $VENV_DIR/bin/activate" && python3 helloworld.py'
             }
         }
     }
